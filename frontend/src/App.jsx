@@ -1,9 +1,12 @@
 import React, { useState, useRef } from 'react';
+import CoverPage from './components/CoverPage';
+import ISLogo from './components/ISLogo';
 import { Upload, PlayCircle, PauseCircle, FileAudio, Image, CheckCircle, AlertTriangle, BarChart3, Activity, TrendingUp } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, PieChart, Pie, Cell } from 'recharts';
 import './App.css';
 
 function App() {
+  const [showCover, setShowCover] = useState(true);
   const [audioFiles, setAudioFiles] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
   const [selectedAudio, setSelectedAudio] = useState(null);
@@ -217,12 +220,24 @@ function App() {
     { name: 'Uncertainty', value: 100 - parseFloat(analysisResults.confidence), color: '#ecf0f1' }
   ] : [];
 
+  if (showCover) return <CoverPage onEnter={() => setShowCover(false)} />;
+
   return (
     <div className="app-container">
       <div className="main-container">
         <div className="header">
-          <h1>🎵 Machine Fault Detection</h1>
-          <p>Upload your audio files and analysis images to view comprehensive results</p>
+          <div className="header-brand">
+            <ISLogo size={36} />
+            <div className="header-brand-text">
+              <span className="header-brand-name">Indieschwarz</span>
+              <span className="header-brand-product">Technology</span>
+            </div>
+          </div>
+          <span className="header-title">Machine Fault Detection</span>
+          <div className="header-status">
+            <div className="header-status-dot" />
+            System Online
+          </div>
         </div>
 
         <div className="content">
